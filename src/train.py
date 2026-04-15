@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+
 ARTIFACT_DIR = Path("artifacts")
 MODEL_PATH = ARTIFACT_DIR / "model.joblib"
 METRICS_PATH = ARTIFACT_DIR / "metrics.json"
@@ -40,7 +41,13 @@ def main():
     joblib.dump(model, MODEL_PATH)
 
     METRICS_PATH.write_text(
-        json.dumps({"accuracy": acc, "f1_macro": f1}, indent=2)
+        json.dumps(
+            {
+                "accuracy": acc,
+                "f1_macro": f1
+            },
+            indent=2
+        )
     )
 
     print(f"accuracy={acc:.4f}")
