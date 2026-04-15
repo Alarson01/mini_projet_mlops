@@ -58,4 +58,3 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/mini-mlops:latest
-``
