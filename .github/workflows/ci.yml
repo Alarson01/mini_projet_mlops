@@ -38,6 +38,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set lowercase GitHub owner
+        run: |
+          echo "REPO_OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -48,9 +52,9 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ghcr.io/${{ github.repository_owner }}/mini-mlops:latest \
+            -t ghcr.io/$REPO_OWNER_LOWER/mini-mlops:latest \
             .
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ github.repository_owner }}/mini-mlops:latest
+          docker push ghcr.io/$REPO_OWNER_LOWER/mini-mlops:latest
